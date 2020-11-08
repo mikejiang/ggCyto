@@ -10,9 +10,9 @@ name: build
 
 on:
   push:
-    branches: [ bioc_3.12, bioc_3.13 ]
+    branches: [ bioc_3.12, master ]
   pull_request:
-    branches: [ bioc_3.12, bioc_3.13 ]
+    branches: [ bioc_3.12, master ]
 
 jobs:
   build:
@@ -47,7 +47,7 @@ jobs:
         shell: Rscript {0}
         
       - name: Get bioc ver
-        run: echo "bioc_ver=(Rscript -e 'remotes::bioc_version()')" >> $GITHUB_ENV
+        run: echo "bioc_ver=$(Rscript -e 'remotes::bioc_version()')" >> $GITHUB_ENV
         
       - name: Cache R packages
         if: runner.os != 'Windows'
@@ -70,8 +70,9 @@ jobs:
 
       - name: Install dependencies
         run: |
-          remotes::install_deps(dependencies = TRUE)
           remotes::install_cran(c("rcmdcheck", "devtools"))
+          remotes::install_github("RGLab/cytoinstaller")
+          cytoinstaller::cyto_install_deps(dependencies = TRUE)
         shell: Rscript {0}
 
       - name: build src pkg
