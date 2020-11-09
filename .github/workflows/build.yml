@@ -91,6 +91,6 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: '../*.${{ matrix.config.suffix }}'
           file_glob: true
-          tag: $bioc_ver
+          tag: bioc_${{ env.bioc_ver}}
           overwrite: true
           body: "This is my release text"
