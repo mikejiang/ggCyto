@@ -48,6 +48,7 @@ jobs:
         
       - name: Get bioc ver
         run: echo "bioc_ver=$(Rscript -e 'writeLines(as.character(remotes::bioc_version()))')" >> $GITHUB_ENV
+        shell: bash
         
       - name: Cache R packages
         if: runner.os != 'Windows'
@@ -59,6 +60,7 @@ jobs:
 
       - name: check bioc ver
         run: echo $bioc_ver
+        shell: bash
         
       - name: Install system dependencies
         if: runner.os == 'Linux'
