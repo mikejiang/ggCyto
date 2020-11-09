@@ -16,9 +16,9 @@ on:
 
 jobs:
   build:
+    if: (${{ github.ref	}} == "refs/heads/release" && ${{ matrix.config.r }} == 'release' ) || (${{ github.ref	}} == "refs/heads/master" && ${{ matrix.config.r }} == 'devel' )
     runs-on: ${{ matrix.config.os }}
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
-    if: (${{ github.ref	}} == "refs/heads/release" && ${{ matrix.config.r }} == 'release' ) || (${{ github.ref	}} == "refs/heads/master" && ${{ matrix.config.r }} == 'devel' )
     strategy:
       fail-fast: false
       matrix:
