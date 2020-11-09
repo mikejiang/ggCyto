@@ -16,9 +16,9 @@ on:
 
 jobs:
   build:
-    if: (${{ github.ref	}} == "refs/heads/release" && ${{ matrix.config.r }} == 'release' ) || (${{ github.ref	}} == "refs/heads/master" && ${{ matrix.config.r }} == 'devel' )
     runs-on: ${{ matrix.config.os }}
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+    if: (${{ github.ref	}} == "refs/heads/release")
     strategy:
       fail-fast: false
       matrix:
@@ -26,7 +26,7 @@ jobs:
           - {os: windows-latest, r: 'release', suffix: 'zip'}
           - {os: macOS-latest, r: 'release', suffix: 'tgz'}
           - {os: ubuntu-20.04, r: 'release', suffix: 'tar.gz', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
-          - {os: ubuntu-16.04,   r: 'devel', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest", http-user-agent: "R/4.0.0 (ubuntu-16.04) R (4.0.0 x86_64-pc-linux-gnu x86_64 linux-gnu) on GitHub Actions" }
+          - {os: ubuntu-16.04, r: 'devel', suffix: 'tar.gz', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest", http-user-agent: "R/4.0.0 (ubuntu-16.04) R (4.0.0 x86_64-pc-linux-gnu x86_64 linux-gnu) on GitHub Actions" }
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
