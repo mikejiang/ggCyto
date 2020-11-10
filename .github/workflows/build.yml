@@ -10,9 +10,9 @@ name: build
 
 on:
   push:
-    branches: [ bioc_3.12, master ]
+    branches: [ release, master ]
   pull_request:
-    branches: [ bioc_3.12, master ]
+    branches: [ release, master ]
 
 jobs:
   build:
